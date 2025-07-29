@@ -1,0 +1,182 @@
+[
+  {
+    "id": 1,
+    "exchangedName": "Binance",
+    "type": "CEX",
+    "totalBalance": "$ 34585.99"
+  },
+  {
+    "id": 2,
+    "exchangedName": "SushiSwap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 3,
+    "exchangedName": "Uniswap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 4,
+    "exchangedName": "SushiSwap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 5,
+    "exchangedName": "Design",
+    "type": "DEX",
+    "totalBalance": "$ 34585.99"
+  },
+  {
+    "id": 6,
+    "exchangedName": "Capabilities",
+    "type": "DEX",
+    "totalBalance": "$ 34585.99"
+  },
+  {
+    "id": 7,
+    "exchangedName": "Uniswap",
+    "type": "DEX",
+    "totalBalance": "$ 34585.99"
+  },
+  {
+    "id": 8,
+    "exchangedName": "SushiSwap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 9,
+    "exchangedName": "Coinbase",
+    "type": "CEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 10,
+    "exchangedName": "Uniswap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 11,
+    "exchangedName": "SushiSwap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 12,
+    "exchangedName": "PancakeSwap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 13,
+    "exchangedName": "SushiSwap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 14,
+    "exchangedName": "Uniswap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 15,
+    "exchangedName": "SushiSwap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 16,
+    "exchangedName": "Raydium",
+    "type": "DEX",
+    "totalBalance": "$ 34585.99"
+  },
+  {
+    "id": 17,
+    "exchangedName": "Raydium",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 18,
+    "exchangedName": "Binance",
+    "type": "CEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 19,
+    "exchangedName": "SushiSwap",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 20,
+    "exchangedName": "Raydium",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 21,
+    "exchangedName": "Binance",
+    "type": "CEX",
+    "totalBalance": "$ 34585.99"
+  },
+  {
+    "id": 22,
+    "exchangedName": "Raydium",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 23,
+    "exchangedName": "Coinbase",
+    "type": "CEX",
+    "totalBalance": "$ 34585.99"
+  },
+  {
+    "id": 24,
+    "exchangedName": "Kraken",
+    "type": "CEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 25,
+    "exchangedName": "Bybit",
+    "type": "CEX",
+    "totalBalance": "$ 34585.99"
+  },
+  {
+    "id": 26,
+    "exchangedName": "Coinbase",
+    "type": "CEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 27,
+    "exchangedName": "Bybit",
+    "type": "CEX",
+    "totalBalance": "$ 34585.99"
+  },
+  {
+    "id": 28,
+    "exchangedName": "Raydium",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  },
+  {
+    "id": 29,
+    "exchangedName": "Kraken",
+    "type": "CEX",
+    "totalBalance": "$ 34585.99"
+  },
+  {
+    "id": 30,
+    "exchangedName": "Raydium",
+    "type": "DEX",
+    "totalBalance": "$ 35.9876"
+  }
+]

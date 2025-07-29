@@ -1,18 +1,15 @@
-import { ChartAreaInteractive } from "../../../components/chart-area-interactive";
-import { DataTable } from "../../../components/data-table";
-import { SectionCards } from "../../../components/section-cards";
-
-
-import data from "./data.json";
+import { ConnectExchange } from "../../../components/connect-exchange";
+import { ConnectedExchanges } from "../../../components/connectd-exchanges";
+import { ExchangeCounts } from "../../../components/exchange-counts";
+import { BotConfiguration } from "../../../components/bot-configuration";
 
 export default function Page() {
   return (
     <>
-      <SectionCards />
-        <div className="px-4 lg:px-6">
-          <ChartAreaInteractive />
-        </div>
-      <DataTable data={data} />
+      <ConnectExchange />
+      <ConnectedExchanges />
+      <ExchangeCounts />
+      <BotConfiguration />
     </>
   )
 }

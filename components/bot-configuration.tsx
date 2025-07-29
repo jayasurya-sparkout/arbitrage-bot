@@ -58,7 +58,7 @@ export function BotConfiguration() {
                 <CardHeader>
                     <CardTitle className="text-2xl font-semibold">Bot Configuration</CardTitle>
                     {step === 0 && (
-                        <Button className="w-max m-auto" onClick={() => setStep(1)}>
+                        <Button className="w-max m-auto cursor-pointer" onClick={() => setStep(1)}>
                             Configure New Bot
                         </Button>
                     )}
@@ -163,7 +163,7 @@ export function BotConfiguration() {
                         )}
 
                         <CardFooter className="flex justify-between">
-                            {step > 1 && (
+                            {step > 1 ? (
                                 <Button variant="outline" onClick={prevStep} className="cursor-pointer">
                                     {step === 3
                                         ? "Back to Exchanges"
@@ -171,6 +171,10 @@ export function BotConfiguration() {
                                         ? "Back to Pairs"
                                         :"Back to Arbitrage Type"
                                     }
+                                </Button>
+                            ) : (
+                                <Button variant="outline" onClick={() => setStep(0)} className="cursor-pointer">
+                                    Clear
                                 </Button>
                             )}
                             <Button

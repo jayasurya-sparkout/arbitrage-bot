@@ -89,7 +89,6 @@ export function ConnectExchange() {
                   id="apiKey"
                   type="text"
                   placeholder="Enter API Key"
-                  required
                 />
               </div>
               <div className="w-full">
@@ -99,7 +98,6 @@ export function ConnectExchange() {
                   id="secretKey"
                   type="password"
                   placeholder="Enter Secret Key"
-                  required
                 />
               </div>
             </div>
@@ -111,7 +109,6 @@ export function ConnectExchange() {
                 id="privateKey"
                 type="password"
                 placeholder="Enter Private Key"
-                required
               />
             </div>
           )}

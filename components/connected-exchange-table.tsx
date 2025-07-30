@@ -25,10 +25,7 @@ import {
   IconChevronRight,
   IconChevronsLeft,
   IconChevronsRight,
-  IconCircleCheckFilled,
   IconDotsVertical,
-  IconGripVertical,
-  IconLoader,
 } from "@tabler/icons-react"
 import {
   ColumnDef,
@@ -48,12 +45,10 @@ import {
 import { z } from "zod";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { Checkbox } from "./ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Label } from "./ui/label";
@@ -72,6 +67,7 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import clsx from "clsx";
 
 export const schema = z.object({
   id: z.number(),
@@ -80,35 +76,13 @@ export const schema = z.object({
   totalBalance: z.string()
 })
 
-// Create a separate component for the drag handle
-function DragHandle({ id }: { id: number }) {
-  const { attributes, listeners } = useSortable({
-    id,
-  })
-
-  return (
-    <Button
-      {...attributes}
-      {...listeners}
-      variant="ghost"
-      size="icon"
-      className="text-muted-foreground size-7 hover:bg-transparent"
-    >
-      <IconGripVertical className="text-muted-foreground size-3" />
-      <span className="sr-only">Drag to reorder</span>
-    </Button>
-  )
-}
-
 const columns: ColumnDef<z.infer<typeof schema>>[] = [
   {
     id: "drag",
     header: () => (
       <div className="px-3">S.No</div>
     ),
-    cell: ({ row }) => (
-      <div className="px-3">{row.original.id}</div>
-    ),
+    cell: ({ row }) => row.index + 1,
   },
   {
     accessorKey: "exchangedName",
@@ -189,7 +163,20 @@ export function ConnectedExchangeTable({
 }: {
   data: z.infer<typeof schema>[]
 }) {
-  const [data, setData] = React.useState(() => initialData)
+  const [selectedTab, setSelectedTab] = React.useState<"CEX" | "DEX">("CEX")
+
+  const filteredData = React.useMemo(() => {
+    return initialData.filter(
+      (item) => item.type.toLowerCase() === selectedTab.toLowerCase()
+    )
+  }, [initialData, selectedTab])
+
+  const [data, setData] = React.useState(filteredData)
+
+  React.useEffect(() => {
+    setData(filteredData)
+  }, [filteredData])
+
   const [rowSelection, setRowSelection] = React.useState({})
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({})
@@ -209,7 +196,7 @@ export function ConnectedExchangeTable({
   )
 
   const dataIds = React.useMemo<UniqueIdentifier[]>(
-    () => data?.map(({ id }) => id) || [],
+    () => data.map(({ id }) => id),
     [data]
   )
 
@@ -241,16 +228,51 @@ export function ConnectedExchangeTable({
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event
     if (active && over && active.id !== over.id) {
-      setData((data) => {
-        const oldIndex = dataIds.indexOf(active.id)
-        const newIndex = dataIds.indexOf(over.id)
-        return arrayMove(data, oldIndex, newIndex)
-      })
+      const oldIndex = dataIds.indexOf(active.id)
+      const newIndex = dataIds.indexOf(over.id)
+      setData((prev) => arrayMove(prev, oldIndex, newIndex))
     }
   }
 
   return (
     <div className="">
+
+      <div className="flex flex-wrap justify-between items-center w-full">
+        <div className="text-2xl font-semibold mb-6">Your Connected Exchanges</div>
+
+        <div className="bg-muted rounded-md p-3 mb-4 overflow-hidden">
+
+          <div className="relative z-10 flex w-full">
+            <div
+              className={clsx(
+                "absolute top-0 left-0 h-8 rounded-md bg-primary transition-all duration-300 w-[calc(50%)]",
+                selectedTab === "DEX" && "translate-x-full"
+              )}
+            />
+            <Button
+              variant="ghost"
+              className={clsx(
+                "w-1/2 h-8 text-sm font-medium transition-all z-2",
+                selectedTab === "CEX" ? "!text-white hover:bg-black" : "cursor-pointer"
+              )}
+              onClick={() => setSelectedTab("CEX")}
+            >
+              Centralized (CEX)
+            </Button>
+            <Button
+              variant="ghost"
+              className={clsx(
+                "w-1/2 h-8 text-sm font-medium transition-all z-2",
+                selectedTab === "DEX" ? "!text-white hover:bg-black bg-black" : "cursor-pointer"
+              )}
+              onClick={() => setSelectedTab("DEX")}
+            >
+              Decentralized (DEX)
+            </Button>
+          </div>
+        </div>
+      </div>
+
       <div className="overflow-hidden rounded-lg border">
         <DndContext
           collisionDetection={closestCenter}
@@ -263,23 +285,21 @@ export function ConnectedExchangeTable({
             <TableHeader className="bg-muted sticky top-0 z-10">
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <TableHead key={header.id} colSpan={header.colSpan}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                      </TableHead>
-                    )
-                  })}
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                    </TableHead>
+                  ))}
                 </TableRow>
               ))}
             </TableHeader>
             <TableBody className="**:data-[slot=table-cell]:first:w-8">
-              {table.getRowModel().rows?.length ? (
+              {table.getRowModel().rows.length ? (
                 <SortableContext
                   items={dataIds}
                   strategy={verticalListSortingStrategy}
@@ -302,9 +322,9 @@ export function ConnectedExchangeTable({
           </Table>
         </DndContext>
       </div>
+
       <div className="flex items-center justify-between px-4 pt-4">
-        <div className="text-muted-foreground hidden flex-1 text-sm lg:flex">
-        </div>
+        <div className="hidden lg:flex text-muted-foreground text-sm flex-1" />
         <div className="flex w-full items-center gap-8 lg:w-fit">
           <div className="hidden items-center gap-2 lg:flex">
             <Label htmlFor="rows-per-page" className="text-sm font-medium">
@@ -312,14 +332,10 @@ export function ConnectedExchangeTable({
             </Label>
             <Select
               value={`${table.getState().pagination.pageSize}`}
-              onValueChange={(value) => {
-                table.setPageSize(Number(value))
-              }}
+              onValueChange={(value) => table.setPageSize(Number(value))}
             >
               <SelectTrigger size="sm" className="w-20" id="rows-per-page">
-                <SelectValue
-                  placeholder={table.getState().pagination.pageSize}
-                />
+                <SelectValue placeholder={table.getState().pagination.pageSize} />
               </SelectTrigger>
               <SelectContent side="top">
                 {[10, 20, 30, 40, 50].map((pageSize) => (
@@ -330,9 +346,8 @@ export function ConnectedExchangeTable({
               </SelectContent>
             </Select>
           </div>
-          <div className="flex w-fit items-center justify-center text-sm font-medium">
-            Page {table.getState().pagination.pageIndex + 1} of{" "}
-            {table.getPageCount()}
+          <div className="flex items-center text-sm font-medium">
+            Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
           </div>
           <div className="ml-auto flex items-center gap-2 lg:ml-0">
             <Button
@@ -341,37 +356,30 @@ export function ConnectedExchangeTable({
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
-              <span className="sr-only">Go to first page</span>
               <IconChevronsLeft />
             </Button>
             <Button
               variant="outline"
               className="size-8"
-              size="icon"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
             >
-              <span className="sr-only">Go to previous page</span>
               <IconChevronLeft />
             </Button>
             <Button
               variant="outline"
               className="size-8"
-              size="icon"
               onClick={() => table.nextPage()}
               disabled={!table.getCanNextPage()}
             >
-              <span className="sr-only">Go to next page</span>
               <IconChevronRight />
             </Button>
             <Button
               variant="outline"
               className="hidden size-8 lg:flex"
-              size="icon"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}
               disabled={!table.getCanNextPage()}
             >
-              <span className="sr-only">Go to last page</span>
               <IconChevronsRight />
             </Button>
           </div>
@@ -380,5 +388,3 @@ export function ConnectedExchangeTable({
     </div>
   )
 }
-
-

@@ -54,8 +54,8 @@ export function BotConfiguration() {
 
     return (
         <div className="px-4 lg:px-6">
-            <Card className="@container/card gap-6">
-                <CardHeader>
+            <Card className="@container/card gap-4">
+                <CardHeader className="gap-0">
                     <CardTitle className="text-2xl font-semibold">Bot Configuration</CardTitle>
                     {step === 0 && (
                         <Button className="w-max m-auto cursor-pointer" onClick={() => setStep(1)}>
@@ -65,7 +65,7 @@ export function BotConfiguration() {
                 </CardHeader>
 
                 {step > 0 && (
-                    <div className="flex flex-col gap-6">
+                    <div className="flex flex-col gap-4">
                         
                         {step === 1 && (
                             <CardContent className="flex flex-col gap-4">
@@ -151,11 +151,11 @@ export function BotConfiguration() {
                         {step === 4 && (
                             <CardContent className="flex flex-col gap-4">
                                 <div className="text-lg font-bold text-primary">Set Amount & Slippage</div>
-                                <div>
+                                <div className="flex flex-col gap-4">
                                     <Label htmlFor="amount">Trade Amount (USD)</Label>
                                     <Input id="amount" type="number" placeholder="e.g. 1000" className="focus-visible:ring-transparent" />
                                 </div>
-                                <div>
+                                <div className="flex flex-col gap-4">
                                     <Label htmlFor="slippage">Max Slippage (%)</Label>
                                     <Input id="slippage" type="number" placeholder="e.g. 0.5" className="focus-visible:ring-transparent" />
                                 </div>

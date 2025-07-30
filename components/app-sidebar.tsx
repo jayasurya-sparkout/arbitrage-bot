@@ -35,6 +35,11 @@ const data = {
       url: "/user/walletmanagement",
       icon: IconDashboard,
     },
+    {
+      title: "Configure Bot",
+      url: "/user/botconfiguration",
+      icon: IconDashboard,
+    },
   ],
 }
 

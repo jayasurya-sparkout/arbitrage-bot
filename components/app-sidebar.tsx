@@ -30,6 +30,11 @@ const data = {
       url: "/user/dashboard",
       icon: IconDashboard,
     },
+    {
+      title: "Wallet Management",
+      url: "/user/walletmanagement",
+      icon: IconDashboard,
+    },
   ],
 }
 

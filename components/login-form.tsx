@@ -61,6 +61,10 @@ export function LoginForm({
           localStorage.setItem("token", data.access_token);
         }
 
+        if (data.data.id) {
+          localStorage.setItem("id", data.data.id);
+        }
+
         window.location.href = "/user/dashboard";
         console.log(response)
       } else {

@@ -31,7 +31,7 @@ export function NavMain({
             const isActive = pathname.includes(item.url);
             return (
               <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title} data-active={isActive ? true : false} className={`${isActive ? '!bg-primary !text-primary-foreground' : 'hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear'}`}>
+              <SidebarMenuButton tooltip={item.title} data-active={isActive ? true : false} className={`${isActive ? '!bg-primary' : 'hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 text-white min-w-8 transition-all duration-200 ease-linear'}`}>
                 {item.icon && <item.icon />}
                 <Link href={item.url} className="">
                   <span>{item.title}</span>

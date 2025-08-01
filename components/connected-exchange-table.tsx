@@ -82,7 +82,11 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
     header: () => (
       <div className="px-3">S.No</div>
     ),
-    cell: ({ row }) => row.index + 1,
+    cell: ({ row }) => (
+      <div className="text-center">
+        {row.index + 1}
+      </div>
+    ),
   },
   {
     accessorKey: "exchangedName",
@@ -126,7 +130,7 @@ const columns: ColumnDef<z.infer<typeof schema>>[] = [
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-32">
           <DropdownMenuItem className="cursor-pointer">View Details</DropdownMenuItem>
-          <DropdownMenuItem variant="destructive" className="cursor-pointer">Disconnect</DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">Disconnect</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     ),
@@ -240,7 +244,7 @@ export function ConnectedExchangeTable({
       <div className="flex flex-wrap justify-between items-center w-full">
         <div className="text-2xl font-semibold mb-6">Your Connected Exchanges</div>
 
-        <div className="bg-muted rounded-md p-3 mb-4 overflow-hidden">
+        <div className="bg-muted rounded-md p-[3px] mb-4 overflow-hidden">
 
           <div className="relative z-10 flex w-full">
             <div
@@ -253,7 +257,7 @@ export function ConnectedExchangeTable({
               variant="ghost"
               className={clsx(
                 "w-1/2 h-8 text-sm font-medium transition-all z-2",
-                selectedTab === "CEX" ? "!text-white hover:bg-black" : "cursor-pointer"
+                selectedTab === "CEX" ? "!text-white hover:bg-primary" : "cursor-pointer hover:bg-primary"
               )}
               onClick={() => setSelectedTab("CEX")}
             >
@@ -263,7 +267,7 @@ export function ConnectedExchangeTable({
               variant="ghost"
               className={clsx(
                 "w-1/2 h-8 text-sm font-medium transition-all z-2",
-                selectedTab === "DEX" ? "!text-white hover:bg-black bg-black" : "cursor-pointer"
+                selectedTab === "DEX" ? "!text-white hover:bg-primary bg-primary" : "cursor-pointer hover:bg-primary"
               )}
               onClick={() => setSelectedTab("DEX")}
             >

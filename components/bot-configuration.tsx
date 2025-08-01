@@ -54,7 +54,7 @@ export function BotConfiguration() {
 
     return (
         <div className="px-4 lg:px-6">
-            <Card className="@container/card gap-4">
+            <Card className="@container/card gap-4 border-2">
                 <CardHeader className="gap-0">
                     <CardTitle className="text-2xl font-semibold">Bot Configuration</CardTitle>
                     {step === 0 && (
@@ -103,7 +103,7 @@ export function BotConfiguration() {
                             <CardContent className="flex flex-col gap-4">
                                 <div className="text-lg font-bold text-primary">Select Exchanges</div>
                                 <Input
-                                    className="focus-visible:ring-transparent"
+                                    className="focus-visible:ring-transparent border border-primary"
                                     placeholder="Search exchanges..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -140,7 +140,7 @@ export function BotConfiguration() {
                                     <span className="text-purple-600">{selectedExchanges.join(", ")}</span>
                                 </div>
                                 <Input
-                                    className="focus-visible:ring-transparent"
+                                    className="focus-visible:ring-transparent border-2 border-primary"
                                     placeholder="Search pairs (e.g., BTC/USDT)"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -153,18 +153,18 @@ export function BotConfiguration() {
                                 <div className="text-lg font-bold text-primary">Set Amount & Slippage</div>
                                 <div className="flex flex-col gap-4">
                                     <Label htmlFor="amount">Trade Amount (USD)</Label>
-                                    <Input id="amount" type="number" placeholder="e.g. 1000" className="focus-visible:ring-transparent" />
+                                    <Input id="amount" type="number" placeholder="e.g. 1000" className="focus-visible:ring-transparent border-primary" />
                                 </div>
                                 <div className="flex flex-col gap-4">
                                     <Label htmlFor="slippage">Max Slippage (%)</Label>
-                                    <Input id="slippage" type="number" placeholder="e.g. 0.5" className="focus-visible:ring-transparent" />
+                                    <Input id="slippage" type="number" placeholder="e.g. 0.5" className="focus-visible:ring-transparent border-primary" />
                                 </div>
                             </CardContent>
                         )}
 
                         <CardFooter className="flex justify-between">
                             {step > 1 ? (
-                                <Button variant="outline" onClick={prevStep} className="cursor-pointer">
+                                <Button variant="outline" onClick={prevStep} className="cursor-pointer border-2 hover:border-transparent">
                                     {step === 3
                                         ? "Back to Exchanges"
                                         : step === 4
@@ -173,12 +173,15 @@ export function BotConfiguration() {
                                     }
                                 </Button>
                             ) : (
-                                <Button variant="outline" onClick={() => setStep(0)} className="cursor-pointer">
+                                <Button variant="outline" onClick={() => {
+                                        setStep(0), setSelectedType("")
+                                    }} className={`cursor-pointer border-2 hover:border-transparent ${step === 1 && !selectedType ? "cursor-not-allowed pointer-events-none" : ''}`}
+                                >
                                     Clear
                                 </Button>
                             )}
                             <Button
-                                className="ml-auto cursor-pointer"
+                                className={`ml-auto cursor-pointer`}
                                 onClick={() => {
                                     if (step === 4) {
                                         alert("Configuration saved!");

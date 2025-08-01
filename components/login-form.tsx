@@ -62,11 +62,18 @@ export function LoginForm({
         }
 
         if (data.data.id) {
-          localStorage.setItem("id", data.data.id);
+          localStorage.setItem("userId", data.data.id);
+        }
+
+        if (data.data.email) {
+          localStorage.setItem("userEmail", data.data.email);
+        }
+
+        if (data.data.user_name) {
+          localStorage.setItem("userName", data.data.user_name);
         }
 
         window.location.href = "/user/dashboard";
-        console.log(response)
       } else {
         toast.error(data?.detail || data?.message || "Login failed!");
       }
@@ -94,7 +101,7 @@ export function LoginForm({
                   id="email"
                   type="email"
                   placeholder="m@example.com"
-                  className="focus-visible:ring-transparent"
+                  className="focus-visible:ring-transparent border-2 border-border"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -109,7 +116,7 @@ export function LoginForm({
                     Forgot your password?
                   </a>
                 </div>
-                <Input id="password" type="password" className="focus-visible:ring-transparent" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <Input id="password" type="password" className="focus-visible:ring-transparent border-2 border-border" value={password} onChange={(e) => setPassword(e.target.value)} />
               </div>
               <div className="flex flex-col gap-3">
                 <Button type="submit" className="w-full cursor-pointer">

@@ -48,7 +48,7 @@ export function ConnectExchange() {
       : Array.from(new Set(rawData.map((item) => item.exchange)));
 
     useEffect(() => {
-        const id = localStorage.getItem("id");
+        const id = localStorage.getItem("userId");
         setUserId(id ?? "");
     }, []);
 
@@ -114,7 +114,7 @@ export function ConnectExchange() {
     >
       <Card className="@container/card">
         <CardHeader>
-          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+          <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl text-foreground">
             Connect New Exchange
           </CardTitle>
           <CardAction>
@@ -132,7 +132,7 @@ export function ConnectExchange() {
             <div className="w-full">
               <Label htmlFor="group" className="mb-2">Select Exchange</Label>
               <Select value={selectedGroup} onValueChange={setSelectedGroup}>
-                <SelectTrigger className="w-full h-10">
+                <SelectTrigger className="w-full h-10 border-border border-2 focus-visible:ring-transparent">
                   <SelectValue placeholder="Select Exchange" />
                 </SelectTrigger>
                 <SelectContent>
@@ -145,8 +145,7 @@ export function ConnectExchange() {
               </Select>
             </div>
           </CardContent>
-
-          {/* Centralized */}
+          
           <TabsContent value="centralized">
             <CardContent className="grid gap-6">
               <div className="flex flex-col gap-6">
@@ -158,7 +157,7 @@ export function ConnectExchange() {
                     placeholder="Enter API Key"
                     value={apiKey}
                     onChange={(e) => setApiKey(e.target.value)}
-                    className="focus-visible:ring-transparent"
+                    className="focus-visible:ring-transparent border-2 border-border"
                   />
                 </div>
                 <div className="w-full">
@@ -169,7 +168,7 @@ export function ConnectExchange() {
                     placeholder="Enter Secret Key"
                     value={secretKey}
                     onChange={(e) => setSecretKey(e.target.value)}
-                    className="focus-visible:ring-transparent"
+                    className="focus-visible:ring-transparent border-2 border-border"
                   />
                 </div>
               </div>
@@ -187,7 +186,7 @@ export function ConnectExchange() {
                   placeholder="Enter Private Key"
                   value={privateKey}
                   onChange={(e) => setPrivateKey(e.target.value)}
-                  className="focus-visible:ring-transparent"
+                  className="focus-visible:ring-transparent border-2 border-border"
                 />
               </div>
             </CardContent>

@@ -75,7 +75,7 @@ export function LoginForm({
 
         window.location.href = "/user/dashboard";
       } else {
-        toast.error(data?.detail || data?.message || "Login failed!");
+        toast.error(data?.error_message || "Login failed!", { toastId: "error-msg" });
       }
     } catch (error) {
       console.error("Login error:", error);

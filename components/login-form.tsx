@@ -73,12 +73,13 @@ export function LoginForm({
           localStorage.setItem("userName", data.data.user_name);
         }
 
+        document.cookie = "userLoggedIn=true; path=/; max-age=3600; secure; samesite=strict";
+
         window.location.href = "/user/dashboard";
       } else {
         toast.error(data?.error_message || "Login failed!", { toastId: "error-msg" });
       }
     } catch (error) {
-      console.error("Login error:", error);
       toast.error("Something went wrong. Please try again.");
     }
   };

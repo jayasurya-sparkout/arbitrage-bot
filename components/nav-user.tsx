@@ -89,7 +89,9 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">
+            <DropdownMenuItem className="cursor-pointer" onClick={() => {
+              localStorage.clear();
+            }}>
               <IconLogout />
               Log out
             </DropdownMenuItem>

@@ -13,6 +13,7 @@ import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { Login } from "../service/login";
 
 export function LoginForm({
   className,
@@ -43,17 +44,21 @@ export function LoginForm({
       formData.append("username", email);
       formData.append("password", password);
 
-      const response = await fetch("http://13.126.148.9:5006/auth/login/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: formData.toString(),
-      });
+      // const response = await fetch("http://13.126.148.9:5006/auth/login/", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/x-www-form-urlencoded",
+      //   },
+      //   body: formData.toString(),
+      // });
 
-      const data = await response.json();
+      // const data = await response.json();
 
-      if (response.ok) {
+      const response = await Login(email, password);
+
+      const data = response.data;
+
+      if (response.status === 200) {
         toast.success("Login successful!");
         console.log("API Response:", data);
 

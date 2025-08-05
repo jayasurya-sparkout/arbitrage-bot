@@ -18,8 +18,38 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, setThemeState] = useState<Theme>('light');
+  const [theme, setThemeState] = useState<Theme>('tropika');
   const [mounted, setMounted] = useState(false);
+
+  const skipPath = ["/login"];
+
+  useEffect(() => {
+    const handleStorageChange = (event: { type: string }) => {
+      if (event.type === "storage" || event.type === "localStorageChanged") {
+        if (skipPath.includes(window.location.pathname)) {
+          return;
+        }
+        const token = localStorage.getItem("accessToken");
+
+        if (!token) {
+          dispatch({ type: "LOGOUT" });
+        }
+      }
+    };
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("localStorageChanged", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("localStorageChanged", handleStorageChange);
+    };
+  }, []);
+
+  const  dispatch = (action: { type: string })  => {
+    if (action.type === "LOGOUT") {
+      window.location.reload();
+    }
+  }
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

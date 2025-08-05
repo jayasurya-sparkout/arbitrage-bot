@@ -17,10 +17,8 @@ import {
 import { restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import {
   arrayMove,
-  useSortable,
 } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
-import { flexRender, useReactTable, getCoreRowModel } from "@tanstack/react-table";
+import { useReactTable, getCoreRowModel } from "@tanstack/react-table";
 import {
   Table,
   TableBody,
